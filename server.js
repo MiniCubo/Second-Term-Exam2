@@ -1,4 +1,3 @@
-const exp = require("constants");
 const express = require("express");
 const app = express();
 const https = require("https");
@@ -25,24 +24,25 @@ app.use("/pokedex/:index", (req, res, next)=>{
         }).on("end", async () => {
             var pokedex = JSON.parse(data);
             var pokemons = pokedex.results;
-
+            //console.log(pokemons);
             for (let pokemon of pokemons) {
                 try {
                     const urlPokemon = pokemon.url;
                     var data2 = await fetchPokemonData(urlPokemon);
                     var poke = JSON.parse(data2);
                     var name = poke.name;
+                    var id = poke.id;
                     var sprite = poke.sprites.front_default;
                     const pokemonInfo = {
                         name: name,
-                        sprite: sprite
+                        sprite: sprite,
+                        id: id
                     };
                     info.push(pokemonInfo); 
                 } catch (error) {
                     console.error(`error: ${error}`);
                 }
             }
-            initialized = true;
             next();
         });
     }).on("error", (error) => {
