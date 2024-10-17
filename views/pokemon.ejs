@@ -1,0 +1,28 @@
+<%- include("./partials/header") -%>
+    <form action = "/search" method = "POST">
+        <input type="text" name = "name" placeholder="Either enter the name of the pokemon in lowercase">
+        <input type="number" name = "id" placeholder="Or enter the Pokedex ID of the Pokemon">
+        <input type="submit">
+    </form>
+    <div>
+        <img src="<%= pokemon.sprite  %>" alt= "<%= pokemon.name %>">
+        <hr>
+        <h1><%= pokemon.name  %></h1>
+        <% pokemon.types.forEach((element)=>{ %>
+            <h3><%= element.type.name %></h3>
+        <% }) %>
+        <h3> <%= pokemon.w %> KG</h3>
+        <h3> <%= pokemon.h %> M</h3>
+        <h2>Base Stats</h2>
+        <ul>
+            <% pokemon.stats.forEach((element)=>{ %>
+                <li><h4><%= element.stat.name %></h4><p> <%= element.base_stat %> </p></li>
+            <%})  %>
+        </ul>
+    </div>
+    <% if(pokemon.id > 1) {%> <a href="/pn/<%= pokemon.id - 1 %>">Last One</a>
+    <%} else {%><a href="/pn/1025">Last One</a><% } %>
+    <% if(pokemon.id < 1025) {%> <a href="/pn/<%= pokemon.id + 1 %>">Next One</a>
+    <%} else {%><a href="/pn/1">Next One</a><%}  %>
+    
+<%- include("./partials/footer") -%>

@@ -1,0 +1,22 @@
+<%- include("./partials/header") -%>
+    <form action = "/search" method = "POST">
+        <input type="text" name = "name" placeholder="Either enter the name of the pokemon in lowercase">
+        <input type="number" name = "id" placeholder="Or enter the Pokedex ID of the Pokemon">
+        <input type="submit">
+    </form>
+    <% if(locals.info) {%>
+        <% info.forEach((pokemon, index)=> {%>
+            <div>
+                <h1><%= pokemon.name %></h1>
+                <hr>
+                <img src="<%= pokemon.sprite  %>" alt= "<%= pokemon.name %>">
+            </div>
+        <%})  %>
+    <%}  %>
+    <div>
+        <% for(var i=0; i<(Math.ceil(1302/tamPerPage)); i++) {%>
+            <a href="/pokedex/<%= i  %>"><%= i+1 %></a>
+            <%}  %>
+    </div>
+    
+<%- include("./partials/footer") -%>
