@@ -6,28 +6,36 @@
             </div>
             <hr>
             <h1><%= pokemon.name  %></h1>
-            <% pokemon.types.forEach((element)=>{ %>
-                <h3><%= element.type.name.charAt(0).toUpperCase() + element.type.name.slice(1) %></h3>
-            <% }) %>
+            <div class="d-inline-flex justify-content-between">
+                <% pokemon.types.forEach((element)=>{ %>
+                    <h3 class="pokemon-<%= element.type.name %>"><%= element.type.name.charAt(0).toUpperCase() + element.type.name.slice(1) %></h3>
+                <% }) %>
+            </div>
+            
             <h3> <%= pokemon.w %> KG</h3>
             <h3> <%= pokemon.h %> M</h3>
             <h2>Base Stats</h2>
-            <ul>
+            <ul class="list-group">
                 <% pokemon.stats.forEach((element)=>{ %>
-                    <li><h4><%= element.stat.name.charAt(0).toUpperCase() + element.stat.name.slice(1) %></h4><p><%= element.base_stat  %></p></li>
+                <li class="list-group-item d-flex justify-content-between my-2">
+                    <div class="ms-2 me-2 text-dark">
+                        <%= element.stat.name.charAt(0).toUpperCase() + element.stat.name.slice(1) %>
+                    </div>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"><%= element.base_stat  %></span>
+                </li>
                 <%})  %>
             </ul>
-            <div class="d-flex flex-column mb-3">
+            <div class="d-flex flex-column mb-1">
                 <p class="d-inline-flex gap-1">
                     <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample0" aria-expanded="false" aria-controls="collapseExample">
                       Moves
                     </button>
                 </p>
                 <div class="collapse" id="collapseExample0">
-                    <div class="card card-body my-3">
-                        <ul>
+                    <div class="card card-body my-1">
+                        <ul class="list-group list-group-flush">
                         <% pokemon.moves.forEach((element)=>{ %>
-                            <li><%= element.move.name.charAt(0).toUpperCase() + element.move.name.slice(1) %></li>
+                            <li class="text-dark list-group-item"><%= element.move.name.charAt(0).toUpperCase() + element.move.name.slice(1) %></li>
                         <%})  %> 
                         </ul> 
                     </div>
@@ -38,10 +46,10 @@
                     </button>
                 </p>
                 <div class="collapse" id="collapseExample1">
-                    <div class="card card-body my-3">
-                        <ul>
+                    <div class="card card-body my-3 ">
+                        <ul class="list-group list-group-flush">
                             <% pokemon.abilities.forEach((element)=>{ %>
-                                <li><%= element.ability.name.charAt(0).toUpperCase() + element.ability.name.slice(1) %></li>
+                                <li class="text-dark list-group-item"><%= element.ability.name.charAt(0).toUpperCase() + element.ability.name.slice(1) %></li>
                             <%})  %> 
                             </ul> 
                     </div>
