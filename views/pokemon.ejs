@@ -1,19 +1,54 @@
 <%- include("./partials/header") -%>
-    <div>
-        <img src="<%= pokemon.sprite  %>" alt= "<%= pokemon.name %>">
-        <hr>
-        <h1><%= pokemon.name  %></h1>
-        <% pokemon.types.forEach((element)=>{ %>
-            <h3><%= element.type.name %></h3>
-        <% }) %>
-        <h3> <%= pokemon.w %> KG</h3>
-        <h3> <%= pokemon.h %> M</h3>
-        <h2>Base Stats</h2>
-        <ul>
-            <% pokemon.stats.forEach((element)=>{ %>
-                <li><h4><%= element.stat.name %></h4><p> <%= element.base_stat %> </p></li>
-            <%})  %>
-        </ul>
+    <div class="d-inline p-2 carta">
+        <div class="d-flex flex-column justify-content-center w-50 mx-auto text-center">
+            <div class="imagen">
+                <img src="<%= pokemon.sprite  %>" alt= "<%= pokemon.name %>" class="imgPokemon">
+            </div>
+            <hr>
+            <h1><%= pokemon.name  %></h1>
+            <% pokemon.types.forEach((element)=>{ %>
+                <h3><%= element.type.name.charAt(0).toUpperCase() + element.type.name.slice(1) %></h3>
+            <% }) %>
+            <h3> <%= pokemon.w %> KG</h3>
+            <h3> <%= pokemon.h %> M</h3>
+            <h2>Base Stats</h2>
+            <ul>
+                <% pokemon.stats.forEach((element)=>{ %>
+                    <li><h4><%= element.stat.name.charAt(0).toUpperCase() + element.stat.name.slice(1) %></h4><p><%= element.base_stat  %></p></li>
+                <%})  %>
+            </ul>
+            <div class="d-flex flex-column mb-3">
+                <p class="d-inline-flex gap-1">
+                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample0" aria-expanded="false" aria-controls="collapseExample">
+                      Moves
+                    </button>
+                </p>
+                <div class="collapse" id="collapseExample0">
+                    <div class="card card-body my-3">
+                        <ul>
+                        <% pokemon.moves.forEach((element)=>{ %>
+                            <li><%= element.move.name.charAt(0).toUpperCase() + element.move.name.slice(1) %></li>
+                        <%})  %> 
+                        </ul> 
+                    </div>
+                </div>
+                <p class="d-inline-flex gap-1">
+                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample">
+                      Initial Moves
+                    </button>
+                </p>
+                <div class="collapse" id="collapseExample1">
+                    <div class="card card-body my-3">
+                        <ul>
+                            <% pokemon.abilities.forEach((element)=>{ %>
+                                <li><%= element.ability.name.charAt(0).toUpperCase() + element.ability.name.slice(1) %></li>
+                            <%})  %> 
+                            </ul> 
+                    </div>
+                </div>
+            </div>
+            
+        </div>
     </div>
     <% if(pokemon.id > 1) {%> <a href="/pn/<%= pokemon.id - 1 %>">Last One</a>
     <%} else {%><a href="/pn/1025">Last One</a><% } %>

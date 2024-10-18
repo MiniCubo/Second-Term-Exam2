@@ -69,7 +69,7 @@ function fetchPokemonData(url) {
 function buildPokemonData(data) {
     return new Promise((resolve) => {
         var poke = JSON.parse(data);
-        var name = poke.name;
+        var name = poke.name.charAt(0).toUpperCase() + poke.name.slice(1);
         var id = poke.id;
         var height = poke.height/10;
         var experience = poke.base_experience;
@@ -77,6 +77,8 @@ function buildPokemonData(data) {
         var type = poke.types;
         var weight = poke.weight;
         var stats = poke.stats;
+        var moves = poke.moves;
+        var abilities = poke.abilities;
         const pokemonInfo = {
             name: name,
             sprite: sprite,
@@ -85,7 +87,9 @@ function buildPokemonData(data) {
             xp: experience,
             types: type,
             w: weight,
-            stats: stats
+            stats: stats,
+            moves: moves,
+            abilities: abilities
         };
         resolve(pokemonInfo);
         });
@@ -105,10 +109,12 @@ var pokemon = "";
 
 app.post("/search", async (req, res)=>{
     var pokemonName = req.body.name;
-    var pokemonID = req.body.id;
     var placeholder = "";
-    if (pokemonName) placeholder = pokemonName
-    else placeholder = pokemonID
+
+    let regex = /^[a-zA-Z]+$/;
+
+    if (regex.test(pokemonName)) placeholder = pokemonName.toLowerCase();
+    else placeholder = Number(pokemonName);
     const url = `https://pokeapi.co/api/v2/pokemon/${placeholder}`;
     var data = await fetchPokemonData(url);
     if(data == "Not Found"){
