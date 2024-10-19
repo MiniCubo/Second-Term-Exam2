@@ -6,12 +6,14 @@
         <% info.forEach(function(pokemon) { %>
             <div class="col-12 col-sm-6 col-md-4 mb-3">
                 <div class="card h-100">
-                    <% if(pokemon.sprite) {%><img src="<%= pokemon.sprite  %>" alt= "<%= pokemon.name %>" class="card-img-top img-fluid mx-auto d-block" alt="<%= pokemon.name %>" style="max-height: 100px; object-fit: contain;"><%}else {%>
-                        <img src="./img/pokemon.png" alt= "<%= pokemon.name %>" class="card-img-top img-fluid mx-auto d-block" alt="<%= pokemon.name %>" style="max-height: 100px; object-fit: contain;"><%}  %>
-                    <div class="card-body text-center">
-                        <h5 class="card-title text-primary"><%= pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1) %></h5>
-                        <p class="card-text">ID: <%= pokemon.id %></p>
-                    </div>
+                    <a href="/pn/<%= pokemon.id %>">
+                        <% if(pokemon.sprite) {%><img src="<%= pokemon.sprite  %>" alt= "<%= pokemon.name %>" class="card-img-top img-fluid mx-auto d-block" alt="<%= pokemon.name %>" style="max-height: 100px; object-fit: contain;"><%}else {%>
+                            <img src="./img/pokemon.png" alt= "<%= pokemon.name %>" class="card-img-top img-fluid mx-auto d-block" alt="<%= pokemon.name %>" style="max-height: 100px; object-fit: contain;"><%}  %>
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-primary"><%= pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1) %></h5>
+                            <p class="card-text">ID: <%= pokemon.id %></p>
+                        </div>
+                    </a>
                 </div>
             </div>
         <% }); %>
