@@ -1,10 +1,15 @@
 const express = require("express");
 const app = express();
 const https = require("https");
+require("dotenv").config({});
 
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
-app.use(express.static(__dirname+ "/public"));
+//app.use(express.static(__dirname+ "/public"));
+
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('client/build'));
+}
 
 app.engine("ejs", require("ejs").renderFile);
 app.set("view engine", "ejs");
@@ -147,6 +152,8 @@ app.get("/error", (req, res)=>{
     res.render("error", {});
 })
 
-app.listen(3000, ()=>{
-    console.log("Listening to port 3000");
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, ()=>{
+    console.log("Listening to port "+PORT);
 })
