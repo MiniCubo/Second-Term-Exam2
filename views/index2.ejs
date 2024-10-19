@@ -20,13 +20,13 @@
     </div>
     <div class="container mt-4">
         <div class="d-flex justify-content-center align-items-center">
-            <button class="btn btn-outline-secondary me-2" id="prevPage" onclick="scrollPages(-1)">⟨</button>
+            <button class="btn btn-secondary me-2" id="prevPage" onclick="scrollPages(-1)">⟨</button>
             <div class="overflow-auto" style="white-space: nowrap;" id="paginationContainer">
                 <% for(var i=0; i<(Math.ceil(1302/tamPerPage)); i++) { %>
-                    <a href="/pokedex/<%= i %>" class="btn btn-outline-primary mx-1"><%= i+1 %></a>
+                    <a href="/pokedex/<%= i %>" class="btn btn-primary mx-1"><%= i+1 %></a>
                 <% } %>
             </div>
-            <button class="btn btn-outline-secondary ms-2" id="nextPage" onclick="scrollPages(1)">⟩</button>
+            <button class="btn btn-secondary ms-2" id="nextPage" onclick="scrollPages(1)">⟩</button>
         </div>
     </div>
     
@@ -34,17 +34,12 @@
 
 </div>
 
-
-
-
-
-
 <script>
 function scrollPages(direction) {
     const container = document.getElementById('paginationContainer');
     
     
-    const scrollAmount = 50 * direction; 
+    const scrollAmount = 90 * direction; 
     
     
     console.log('Scrolling direction: ', direction);
