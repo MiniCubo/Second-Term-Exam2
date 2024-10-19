@@ -1,19 +1,31 @@
 <%- include("./partials/header") -%>
-    <div class="d-inline p-2 carta">
+    
+    <div class="d-inline-flex p-2 carta w-100">
+        <% if(pokemon.id > 1) {%> <a href="/pn/<%= pokemon.id - 1 %>" class = "boton d-flex justify-content-center h-100"><i class="fa-solid fa-left-long fa-4x"></i></a>
+        <%} else {%><a href="/pn/1025" class = "boton d-flex justify-content-center h-100"><i class="fa-solid fa-left-long fa-4x"></i></a><% } %>
         <div class="d-flex flex-column justify-content-center w-50 mx-auto text-center">
             <div class="imagen">
-                <img src="<%= pokemon.sprite  %>" alt= "<%= pokemon.name %>" class="imgPokemon">
+                <% if(pokemon.sprite) {%><img src="<%= pokemon.sprite  %>" alt= "<%= pokemon.name %>" class="imgPokemon"><%}else {%>
+                    <img src="./img/pokemon.png" alt= "<%= pokemon.name %>" class="imgPokemon"><%}  %>
             </div>
             <hr>
             <h1><%= pokemon.name  %></h1>
-            <div class="d-inline-flex justify-content-between">
+            <div class="d-inline-flex justify-content-evenly my-5">
                 <% pokemon.types.forEach((element)=>{ %>
-                    <h3 class="pokemon-<%= element.type.name %>"><%= element.type.name.charAt(0).toUpperCase() + element.type.name.slice(1) %></h3>
+                    <h3 class="pokemon-<%= element.type.name %> type"><%= element.type.name.charAt(0).toUpperCase() + element.type.name.slice(1) %></h3>
                 <% }) %>
             </div>
+            <div class="d-inline-flex justify-content-evenly my-5">
+                <div>
+                    <h2>Weight</h2>
+                    <h3> <%= pokemon.w %> KG</h3>
+                </div>
+                <div>
+                    <h2>Height</h2>
+                    <h3> <%= pokemon.h %> M</h3>
+                </div>
+            </div>
             
-            <h3> <%= pokemon.w %> KG</h3>
-            <h3> <%= pokemon.h %> M</h3>
             <h2>Base Stats</h2>
             <ul class="list-group">
                 <% pokemon.stats.forEach((element)=>{ %>
@@ -27,7 +39,7 @@
             </ul>
             <div class="d-flex flex-column mb-1">
                 <p class="d-inline-flex gap-1">
-                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample0" aria-expanded="false" aria-controls="collapseExample">
+                    <button class="btn btn-primary w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample0" aria-expanded="false" aria-controls="collapseExample">
                       Moves
                     </button>
                 </p>
@@ -41,7 +53,7 @@
                     </div>
                 </div>
                 <p class="d-inline-flex gap-1">
-                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample">
+                    <button class="btn btn-primary w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample">
                       Initial Moves
                     </button>
                 </p>
@@ -55,12 +67,8 @@
                     </div>
                 </div>
             </div>
-            
         </div>
+        <% if(pokemon.id < 1025) {%> <a href="/pn/<%= pokemon.id + 1 %>" class = "boton d-flex justify-content-center h-100 fa-4x"><i class="fa-solid fa-right-long"></i></a>
+        <%} else {%><a href="/pn/1" class = "boton d-flex justify-content-center h-100"><i class="fa-solid fa-right-long fa-4x"></i></a><%}  %>
     </div>
-    <% if(pokemon.id > 1) {%> <a href="/pn/<%= pokemon.id - 1 %>">Last One</a>
-    <%} else {%><a href="/pn/1025">Last One</a><% } %>
-    <% if(pokemon.id < 1025) {%> <a href="/pn/<%= pokemon.id + 1 %>">Next One</a>
-    <%} else {%><a href="/pn/1">Next One</a><%}  %>
-    
 <%- include("./partials/footer") -%>

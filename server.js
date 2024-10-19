@@ -75,7 +75,7 @@ function buildPokemonData(data) {
         var experience = poke.base_experience;
         var sprite = poke.sprites.front_default;
         var type = poke.types;
-        var weight = poke.weight;
+        var weight = poke.weight/10;
         var stats = poke.stats;
         var moves = poke.moves;
         var abilities = poke.abilities;
@@ -101,6 +101,11 @@ app.route("/")
 });
 
 app.get("/pokedex/:index", (req,res)=>{
+    res.redirect("/pokedex");
+    //res.render("index", {});
+});
+
+app.get("/pokedex", (req,res)=>{
     res.render("index2", {info, tamPerPage});
     //res.render("index", {});
 });

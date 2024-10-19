@@ -1,19 +1,61 @@
 <%- include("./partials/header") -%>
-    <% if(locals.info) {%>
-        <% info.forEach((pokemon, index)=> {%>
-            <a href="/pn/<%= pokemon.id  %>">
-                <div>
-                    <h1><%= pokemon.name %></h1>
-                    <hr>
-                    <img src="<%= pokemon.sprite  %>" alt= "<%= pokemon.name %>">
+<div class="image"> 
+<div class="container mt-3">
+    <h1 class="text-center mb-4">Pokedex</h1>
+    <div class="row">
+        <% info.forEach(function(pokemon) { %>
+            <div class="col-12 col-sm-6 col-md-4 mb-3">
+                <div class="card h-100">
+                    <% if(pokemon.sprite) {%><img src="<%= pokemon.sprite  %>" alt= "<%= pokemon.name %>" class="card-img-top img-fluid mx-auto d-block" alt="<%= pokemon.name %>" style="max-height: 100px; object-fit: contain;"><%}else {%>
+                        <img src="./img/pokemon.png" alt= "<%= pokemon.name %>" class="card-img-top img-fluid mx-auto d-block" alt="<%= pokemon.name %>" style="max-height: 100px; object-fit: contain;"><%}  %>
+                    <div class="card-body text-center">
+                        <h5 class="card-title text-primary"><%= pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1) %></h5>
+                        <p class="card-text">ID: <%= pokemon.id %></p>
+                    </div>
                 </div>
-            </a>
-        <%})  %>
-    <%}  %>
-    <div>
-        <% for(var i=0; i<(Math.ceil(1302/tamPerPage)); i++) {%>
-            <a href="/pokedex/<%= i  %>"><%= i+1 %></a>
-            <%}  %>
+            </div>
+        <% }); %>
+    </div>
+    <div class="container mt-4">
+        <div class="d-flex justify-content-center align-items-center">
+            <button class="btn btn-outline-secondary me-2" id="prevPage" onclick="scrollPages(-1)">⟨</button>
+            <div class="overflow-auto" style="white-space: nowrap;" id="paginationContainer">
+                <% for(var i=0; i<(Math.ceil(1302/tamPerPage)); i++) { %>
+                    <a href="/pokedex/<%= i %>" class="btn btn-outline-primary mx-1"><%= i+1 %></a>
+                <% } %>
+            </div>
+            <button class="btn btn-outline-secondary ms-2" id="nextPage" onclick="scrollPages(1)">⟩</button>
+        </div>
     </div>
     
+</div>
+
+</div>
+
+
+
+
+
+
+<script>
+function scrollPages(direction) {
+    const container = document.getElementById('paginationContainer');
+    
+    
+    const scrollAmount = 50 * direction; 
+    
+    
+    console.log('Scrolling direction: ', direction);
+    console.log('Current scroll position: ', container.scrollLeft);
+
+    
+    container.scrollBy({
+        left: scrollAmount, 
+        behavior: 'smooth'
+    });
+
+    
+    console.log('New scroll position: ', container.scrollLeft);
+}
+</script>
 <%- include("./partials/footer") -%>
